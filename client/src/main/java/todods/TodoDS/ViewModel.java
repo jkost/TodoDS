@@ -11,6 +11,7 @@ import net.java.html.json.Property;
 import todods.TodoDS.js.Dialogs;
 
 @Model(className = "TaskList", targetId = "", properties = {
+    @Property(name = "editing", type = Task.class),
     @Property(name = "tasks", type = Task.class, array = true)
 })
 final class ViewModel {
@@ -30,7 +31,22 @@ final class ViewModel {
         taskList.applyBindings();
     }
     
-        @Function
+    @Function
+    public static void edit(TaskList tasks, Task data) {
+        tasks.setEditing(data);
+    }   
+
+    @Function
+    public static void commit(TaskList tasks, Task data) {
+        tasks.setEditing(null);
+    }   
+
+    @Function
+    public static void cancel(TaskList tasks, Task data) {
+        tasks.setEditing(null);
+    }       
+    
+    @Function
     public static void removeTask(TaskList tasks, Task data) {
         tasks.getTasks().remove(data);
     }   
