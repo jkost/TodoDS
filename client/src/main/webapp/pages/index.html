@@ -7,9 +7,6 @@
     </head>
     <body>
         <!-- ${browser.bootstrap} -->
-        <div data-bind="template: {name: 'task', foreach: tasks, if: !editing()}"></div>
-        <div data-bind="template: {name: 'editor', if: editing(), data: editing()}"></div>
-        <script type="text/ko" id="task">
         <h2>Tasks</h2>
         <div class="rTable">
             <div class="rTableRow">
@@ -17,10 +14,10 @@
                     <button>
                         <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
                     </button>
-                    <button data-bind="click: $data.sortBy">
+                    <button>
                         <img src="../resources/icons/tasks_tsk.gif" alt="Show Completed Tasks" title="Show Completed Tasks"/>
                     </button>
-                    <button data-bind="click: $data.showCompleted">
+                    <button>
                         <img src="../resources/icons/next_nav.gif" alt="Sort By Priority" title="Sort By Priority"/>
                     </button>
                     <button>
@@ -46,18 +43,18 @@
             </div>
             <!-- ko foreach: tasks -->
             <div class="rTableRow" > 
-                <div class="rTableCell" data-bind="text: priority, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
-                <div class="rTableCell" data-bind="text: description, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
-                <div class="rTableCell" data-bind="text: alert, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
-                <div class="rTableCell" data-bind="text: dueDate, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
+                <div class="rTableCell" data-bind="text: priority"></div> 
+                <div class="rTableCell" data-bind="text: description"></div> 
+                <div class="rTableCell" data-bind="text: alert"></div> 
+                <div class="rTableCell" data-bind="text: dueDate"></div> 
                 <div class="rTableCell" >
                     <button>
                         <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
                     </button>
-                    <button data-bind="click: $parent.removeTask ">
+                    <button>
                         <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
                     </button>
-                    <button data-bind="click: $parent.markAsCompleted ">
+                    <button>
                         <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
                     </button>
                 </div> 
@@ -65,20 +62,6 @@
             <!-- /ko -->
         </div>
         <hr/>
-        <div class="rTableFoot" >There are 0 task(s) with alerts today.</div>
-        </script>
-        <script type="text/ko" id="editor">
-          <h2>Create/Edit Task</h2>
-          <form >
-            <label for="description">Description:</label><input type="text" data-bind="value: description"></input><br/>
-            <label for="priority">Priority:</label><input type="number" min="0" max="10" data-bind="value: priority"></input><br/>
-            <label for="dueDate">Due Date:</label><input type="text" data-bind="value: dueDate"></input><br/>
-            <input type="checkbox" data-bind="value: alert"></input><label for="alert">Show alert:</label>
-            <input type="number" min="0" max="365" data-bind="value: daysBefore"></input><label for="daysBefore"> days before</label><hr>
-            <label for="obs">Obs:</label><br/><textarea rows="4" cols="50" data-bind="value: obs"></textarea><hr>
-            <input type="checkbox" data-bind="value: completed"></input><label for="completed">Completed Task</label>
-            <button type="submit" data-bind="click: $parent.commit">Save</button>
-          </form>
-        </script>
+        <div class="rTableFoot">There are 0 task(s) with alerts today.</div>
     </body>
 </html>
