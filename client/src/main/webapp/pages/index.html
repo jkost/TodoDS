@@ -3,21 +3,31 @@
     <head>
         <title>TodoDS</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
-<!-- ${browser.bootstrap} -->
-        <div> 
-            <span>Priority</span> |
-            <span>Description</span> |  
-            <span>Alert?</span> |
-            <span>Due Date</span> 
-        </div>  
-        <div data-bind="foreach: tasks"> 
-            <div>
-                <span data-bind="text: priority"></span> |
-                <span data-bind="text: description"></span> |  
-                <span data-bind="text: alert"></span> |
-                <span data-bind="text: dueDate"></span>
+        <!-- ${browser.bootstrap} -->
+        <h2>Tasks</h2>
+        <div class="rTable" data-bind="foreach: tasks"> 
+            <div class="rTableRow"> 
+                <div class="rTableHead">
+                    <strong>Priority</strong>
+                </div> 
+                <div class="rTableHead">
+                    <span style="font-weight: bold;">Description</span>
+                </div> 
+                <div class="rTableHead">
+                    <strong>Alert?</strong>
+                </div>
+                <div class="rTableHead">
+                    <strong>Due Date</strong>
+                </div>
+            </div>
+            <div class="rTableRow" > 
+                <div class="rTableCell" data-bind="text: priority"></div> 
+                <div class="rTableCell" data-bind="text: description"></div> 
+                <div class="rTableCell" data-bind="text: alert"></div> 
+                <div class="rTableCell" data-bind="text: dueDate"></div> 
             </div>
         </div>
     </body>
