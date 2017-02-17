@@ -12,11 +12,13 @@
             <span>Alert?</span> |
             <span>Due Date</span> 
         </div>  
-        <div> 
-            <span data-bind="text: priority"></span> |
-            <span data-bind="text: description"></span> |  
-            <span data-bind="text: alert"></span> |
-            <span data-bind="text: dueDate"></span> 
+        <div data-bind="foreach: tasks"> 
+            <div>
+                <span data-bind="text: priority"></span> |
+                <span data-bind="text: description"></span> |  
+                <span data-bind="text: alert"></span> |
+                <span data-bind="text: dueDate"></span>
+            </div>
         </div>
     </body>
 </html>
