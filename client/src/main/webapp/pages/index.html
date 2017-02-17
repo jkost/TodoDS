@@ -2,14 +2,32 @@
 <html>
     <head>
         <title>TodoDS</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="index.css">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
         <!-- ${browser.bootstrap} -->
         <h2>Tasks</h2>
+        <div class="rTable">
+            <div class="rTableRow">
+                <div class="rTableCell">
+                    <button>
+                        <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
+                    </button>
+                    <button data-bind="click: $data.sortBy">
+                        <img src="../resources/icons/tasks_tsk.gif" alt="Show Completed Tasks" title="Show Completed Tasks"/>
+                    </button>
+                    <button data-bind="click: $data.showCompleted">
+                        <img src="../resources/icons/next_nav.gif" alt="Sort By Priority" title="Sort By Priority"/>
+                    </button>
+                    <button>
+                        <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
+                    </button>
+                </div>   
+            </div>
+        </div>        
         <div class="rTable" data-bind="foreach: tasks"> 
-            <div class="rTableRow"> 
+            <div class="rTableHeading"> 
                 <div class="rTableHead">
                     <strong>Priority</strong>
                 </div> 
@@ -24,11 +42,24 @@
                 </div>
             </div>
             <div class="rTableRow" > 
-                <div class="rTableCell" data-bind="text: priority"></div> 
-                <div class="rTableCell" data-bind="text: description"></div> 
-                <div class="rTableCell" data-bind="text: alert"></div> 
-                <div class="rTableCell" data-bind="text: dueDate"></div> 
+                <div class="rTableCell" data-bind="text: priority, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
+                <div class="rTableCell" data-bind="text: description, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
+                <div class="rTableCell" data-bind="text: alert, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
+                <div class="rTableCell" data-bind="text: dueDate, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
+                <div class="rTableCell" >
+                    <button>
+                        <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
+                    </button>
+                    <button data-bind="click: $parent.removeTask ">
+                        <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
+                    </button>
+                    <button data-bind="click: $parent.markAsCompleted ">
+                        <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
+                    </button>
+                </div> 
             </div>
         </div>
+        <hr/>
+        <div class="rTableFoot" >There are 0 task(s) with alerts today.</div>
     </body>
 </html>
