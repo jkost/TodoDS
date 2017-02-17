@@ -3,6 +3,7 @@ package todods.TodoDS;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.List;
 import static java.util.stream.Collectors.toList;
 import net.java.html.json.ComputedProperty;
 import net.java.html.json.Function;
@@ -11,7 +12,7 @@ import net.java.html.json.Property;
 import todods.TodoDS.js.Dialogs;
 
 @Model(className = "TaskList", targetId = "", properties = {
-    @Property(name = "editing", type = Task.class),
+//    @Property(name = "editing", type = Task.class),
     @Property(name = "tasks", type = Task.class, array = true)
 })
 final class ViewModel {
@@ -31,20 +32,20 @@ final class ViewModel {
         taskList.applyBindings();
     }
     
-    @Function
-    public static void edit(TaskList tasks, Task data) {
-        tasks.setEditing(data);
-    }   
-
-    @Function
-    public static void commit(TaskList tasks, Task data) {
-        tasks.setEditing(null);
-    }   
-
-    @Function
-    public static void cancel(TaskList tasks, Task data) {
-        tasks.setEditing(null);
-    }       
+//    @Function
+//    public static void edit(TaskList tasks, Task data) {
+//        tasks.setEditing(data);
+//    }   
+//
+//    @Function
+//    public static void commit(TaskList tasks, Task data) {
+//        tasks.setEditing(null);
+//    }   
+//
+//    @Function
+//    public static void cancel(TaskList tasks, Task data) {
+//        tasks.setEditing(null);
+//    }       
     
     @Function
     public static void removeTask(TaskList tasks, Task data) {
@@ -56,9 +57,19 @@ final class ViewModel {
         tasks.getTasks().sort(new PriorityComparator());
     }    
     
-    @Function
-    public static void showCompleted(TaskList tasks) {
-        tasks.getTasks().stream().filter(Task::isCompleted).collect(toList());
+    @ComputedProperty
+    public static List<Task> showCompleted(List<Task> tasks) {
+        return tasks.stream().filter(Task::isCompleted).collect(toList());
+    }    
+    
+    @ComputedProperty
+    public static List<Task> listTasksWithAlert(List<Task> tasks) {
+        return tasks.stream().filter(Task::isAlert).collect(toList());
+    }    
+
+    @ComputedProperty
+    public static int numberOfTasksWithAlert(List<Task> tasks) {
+        return listTasksWithAlert(tasks).size();
     }    
     
     private static class PriorityComparator implements Comparator<Task> {
