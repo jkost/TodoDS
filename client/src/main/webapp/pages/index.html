@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>TodoDS</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
 <!-- ${browser.bootstrap} -->
+        <div> 
+            <span>Priority</span> |
+            <span>Description</span> |  
+            <span>Alert?</span> |
+            <span>Due Date</span> 
+        </div>  
+        <div> 
+            <span data-bind="text: priority"></span> |
+            <span data-bind="text: description"></span> |  
+            <span data-bind="text: alert"></span> |
+            <span data-bind="text: dueDate"></span> 
+        </div>
     </body>
 </html>

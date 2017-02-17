@@ -11,6 +11,7 @@ import org.junit.Test;
 @RunWith(BrowserRunner.class)
 public class DataModelTest {
     @Test public void testUIModelWithoutUI() {
-        Data model = new Data();
+        Task model = new Task(1, "Finish article!", 10, "10/03/2017", true, 2, "", false);
+        assertEquals(10, model.getPriority());
     }
 }
