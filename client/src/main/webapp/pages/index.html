@@ -26,7 +26,7 @@
                 </div>   
             </div>
         </div>        
-        <div class="rTable" data-bind="foreach: tasks"> 
+        <div class="rTable"> 
             <div class="rTableHeading"> 
                 <div class="rTableHead">
                     <strong>Priority</strong>
@@ -41,6 +41,7 @@
                     <strong>Due Date</strong>
                 </div>
             </div>
+            <!-- ko foreach: tasks -->
             <div class="rTableRow" > 
                 <div class="rTableCell" data-bind="text: priority, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
                 <div class="rTableCell" data-bind="text: description, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
@@ -58,6 +59,7 @@
                     </button>
                 </div> 
             </div>
+            <!-- /ko -->
         </div>
         <hr/>
         <div class="rTableFoot" >There are 0 task(s) with alerts today.</div>
