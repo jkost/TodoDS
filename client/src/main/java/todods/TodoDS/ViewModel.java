@@ -48,8 +48,12 @@ final class ViewModel {
         tasks.getTasks().remove(data);
     } 
     
-    @ComputedProperty
-    public static List<Task> listTasksWithAlert(List<Task> tasks) {
+    @Function 
+    public static void expiredTasks(final TaskList tasks) {
+        Dialogs.showAlerts(listTasksWithAlert(tasks.getTasks()));
+    }
+    
+    private static List<Task> listTasksWithAlert(List<Task> tasks) {
         return tasks.stream().filter(Task::isAlert).collect(toList());
     }    
 
