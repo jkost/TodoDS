@@ -26,7 +26,7 @@
                 </div>   
             </div>
         </div>          
-        <div class="rTable"> 
+        <div class="rTable" data-bind="foreach: tasks"> 
             <div class="rTableRow"> 
                 <div class="rTableHead">
                     <strong>Priority</strong>
@@ -42,10 +42,10 @@
                 </div>
             </div>
             <div class="rTableRow"> 
-                <div class="rTableCell">10</div> 
-                <div class="rTableCell">Finish TodoDS article!</div> 
-                <div class="rTableCell">true</div> 
-                <div class="rTableCell">10/03/2017</div> 
+                <div class="rTableCell" data-bind="text: priority"></div> 
+                <div class="rTableCell" data-bind="text: description"></div> 
+                <div class="rTableCell" data-bind="text: alert"></div> 
+                <div class="rTableCell" data-bind="text: dueDate"></div> 
                 <div class="rTableCell" >
                     <a href="edit.html" class="button">
                         <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
@@ -58,23 +58,6 @@
                     </a>
                 </div> 
             </div> 
-            <div class="rTableRow"> 
-                <div class="rTableCell">5</div> 
-                <div class="rTableCell">Book conference room.</div> 
-                <div class="rTableCell">false</div> 
-                <div class="rTableCell">01/04/2017</div> 
-                <div class="rTableCell" >
-                    <a href="edit.html" class="button">
-                        <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
-                    </a>
-                    <a class="button">
-                        <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
-                    </a>
-                    <a class="button">
-                        <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
-                    </a>
-                </div>        
-            </div>         
         </div>
         <hr/>
         <div class="rTableFoot">There are 1 task(s) with alerts today.</div>
