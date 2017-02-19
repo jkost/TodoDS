@@ -7,30 +7,27 @@
     </head>
     <body>
         <!-- ${browser.bootstrap} -->
-        <div data-bind="template: {name: 'task', foreach: tasks}"></div>
-<!--        <div data-bind="template: {name: 'editor', if: editing(), data: editing()}"></div>-->
-        <script type="text/html" id="task">
         <h2>Tasks</h2>
         <div class="rTable">
             <div class="rTableRow">
                 <div class="rTableCell">
-                    <button>
+                    <a href="edit.html" class="button">
                         <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
-                    </button>
-                    <button data-bind="click: $data.showCompleted">
+                    </a>
+                    <a class="button">
                         <img src="../resources/icons/tasks_tsk.gif" alt="Show Completed Tasks" title="Show Completed Tasks"/>
-                    </button>
-                    <button data-bind="click: $data.sortBy">
+                    </a>
+                    <a class="button">
                         <img src="../resources/icons/next_nav.gif" alt="Sort By Priority" title="Sort By Priority"/>
-                    </button>
-                    <button>
+                    </a>
+                    <a class="button">
                         <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
-                    </button>
+                    </a>
                 </div>   
             </div>
-        </div>        
+        </div>          
         <div class="rTable"> 
-            <div class="rTableHeading"> 
+            <div class="rTableRow"> 
                 <div class="rTableHead">
                     <strong>Priority</strong>
                 </div> 
@@ -44,43 +41,42 @@
                     <strong>Due Date</strong>
                 </div>
             </div>
-            <!-- ko foreach: tasks -->
-            <div class="rTableRow" > 
-                <div class="rTableCell" data-bind="text: priority, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
-                <div class="rTableCell" data-bind="text: description, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
-                <div class="rTableCell" data-bind="text: alert, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
-                <div class="rTableCell" data-bind="text: dueDate, style: { 'background-color': completed ? 'green' : 'white' }"></div> 
+            <div class="rTableRow"> 
+                <div class="rTableCell">10</div> 
+                <div class="rTableCell">Finish TodoDS article!</div> 
+                <div class="rTableCell">true</div> 
+                <div class="rTableCell">10/03/2017</div> 
                 <div class="rTableCell" >
-                    <button>
+                    <a href="edit.html" class="button">
                         <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
-                    </button>
-                    <button data-bind="click: $parent.removeTask ">
+                    </a>
+                    <a class="button">
                         <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
-                    </button>
-                    <button data-bind="click: $parent.markAsCompleted ">
+                    </a>
+                    <a class="button">
                         <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
-                    </button>
+                    </a>
                 </div> 
-            </div>
-            <!-- /ko -->
+            </div> 
+            <div class="rTableRow"> 
+                <div class="rTableCell">5</div> 
+                <div class="rTableCell">Book conference room.</div> 
+                <div class="rTableCell">false</div> 
+                <div class="rTableCell">01/04/2017</div> 
+                <div class="rTableCell" >
+                    <a href="edit.html" class="button">
+                        <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
+                    </a>
+                    <a class="button">
+                        <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
+                    </a>
+                    <a class="button">
+                        <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
+                    </a>
+                </div>        
+            </div>         
         </div>
         <hr/>
-        <div class="rTableFoot">There are <label data-bind="text: $data.numberOfTasksWithAlert"/></label> task(s) with alerts today.</div>
-        </script>
-        <!--
-        <script type="text/ko" id="editor">
-          <h2>Create/Edit Task</h2>
-          <form >
-            <label for="description">Description:</label><input type="text" data-bind="value: description"></input><br/>
-            <label for="priority">Priority:</label><input type="number" min="0" max="10" data-bind="value: priority"></input><br/>
-            <label for="dueDate">Due Date:</label><input type="text" data-bind="value: dueDate"></input><br/>
-            <input type="checkbox" data-bind="value: alert"></input><label for="alert">Show alert:</label>
-            <input type="number" min="0" max="365" data-bind="value: daysBefore"></input><label for="daysBefore"> days before</label><hr>
-            <label for="obs">Obs:</label><br/><textarea rows="4" cols="50" data-bind="value: obs"></textarea><hr>
-            <input type="checkbox" data-bind="value: completed"></input><label for="completed">Completed Task</label>
-            <button type="submit" data-bind="click: $parent.commit">Save</button>
-          </form>
-        </script>
-        -->
+        <div class="rTableFoot">There are 1 task(s) with alerts today.</div>
     </body>
 </html>

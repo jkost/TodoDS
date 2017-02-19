@@ -30,3 +30,23 @@
 .rTableBody {
     display: table-row-group;
 }
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    width: 28px;
+    height: 28px;  
+    position: relative;
+    text-decoration: none;
+    color: initial;
+}
+
+a.button img {
+    position:absolute;
+    top: 50%;
+    left:50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

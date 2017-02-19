@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TodoDS</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <!-- ${browser.bootstrap} -->
+        <h2>Create/Edit Task</h2>
+        <form >
+            <label for="description">Description:</label><input type="text"></input><br/>
+            <label for="priority">Priority:</label><input type="number" min="0" max="10" ></input><br/>
+            <label for="dueDate">Due Date:</label><input type="text"></input><br/>
+            <input type="checkbox"></input><label for="alert">Show alert:</label>
+            <input type="number" min="0" max="365"></input><label for="daysBefore"> days before</label><hr>
+            <label for="obs">Obs:</label><br/><textarea rows="4" cols="50"></textarea><hr>
+            <input type="checkbox"></input><label for="completed">Completed Task</label>
+            <button type="submit" formaction="index.html">Save</button><button type="reset">Clear</button>
+        </form>
+    </body>
+</html>
