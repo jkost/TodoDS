@@ -31,6 +31,11 @@ final class ViewModel {
         taskList.applyBindings();
     }
     
+    @Function
+    public static void removeTask(TaskList tasks, Task data) {
+        tasks.getTasks().remove(data);
+    }  
+    
     @Model(className = "Task", targetId = "", properties = {
         @Property(name = "id", type = int.class),
         @Property(name = "description", type = String.class),
@@ -42,6 +47,6 @@ final class ViewModel {
         @Property(name = "completed", type = boolean.class)
     })
     public static class TaskModel {  
-        
+
     }
 }
