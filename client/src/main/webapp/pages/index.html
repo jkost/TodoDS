@@ -26,7 +26,7 @@
                 </div>   
             </div>
         </div>          
-        <div class="rTable" data-bind="foreach: tasks"> 
+        <div class="rTable"> 
             <div class="rTableRow"> 
                 <div class="rTableHead">
                     <strong>Priority</strong>
@@ -41,6 +41,7 @@
                     <strong>Due Date</strong>
                 </div>
             </div>
+            <!-- ko foreach: tasks -->
             <div class="rTableRow"> 
                 <div class="rTableCell" data-bind="text: priority"></div> 
                 <div class="rTableCell" data-bind="text: description"></div> 
@@ -57,7 +58,8 @@
                         <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
                     </a>
                 </div> 
-            </div> 
+            </div>
+            <!-- /ko -->
         </div>
         <hr/>
         <div class="rTableFoot">There are 1 task(s) with alerts today.</div>
