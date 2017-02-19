@@ -7,6 +7,8 @@
     </head>
     <body>
         <!-- ${browser.bootstrap} -->
+        <div data-bind="template: {name: 'task'}"></div>
+        <script type="text/html" id="task">
         <h2>Tasks</h2>
         <div class="rTable">
             <div class="rTableRow">
@@ -63,5 +65,6 @@
         </div>
         <hr/>
         <div class="rTableFoot">There are 1 task(s) with alerts today.</div>
+        </script>
     </body>
 </html>
