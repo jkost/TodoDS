@@ -12,6 +12,7 @@ import net.java.html.json.Property;
 import todods.TodoDS.js.Dialogs;
 
 @Model(className = "TaskList", targetId = "", properties = {
+    @Property(name = "editing", type = Task.class),
     @Property(name = "tasks", type = Task.class, array = true)
 })
 final class ViewModel {
@@ -25,6 +26,7 @@ final class ViewModel {
         task.setDescription("Finish TodoDS article!");
         task.setAlert(true);
         task.setDueDate("10/03/2017");
+        task.setCompleted(false);
         TaskList taskList = new TaskList();
         taskList.getTasks().add(task);
         taskList.getTasks().add(new Task(2, "Book venue!", 7, "01/04/2017", false, 2, "", false));
@@ -32,9 +34,29 @@ final class ViewModel {
     }
     
     @Function
+    public static void edit(TaskList tasks, Task data) {
+        tasks.setEditing(data);
+    }   
+
+    @Function
+    public static void commit(TaskList tasks, Task data) {
+        tasks.setEditing(null);
+    }       
+    
+    @Function
     public static void removeTask(TaskList tasks, Task data) {
         tasks.getTasks().remove(data);
-    }  
+    } 
+    
+    @ComputedProperty
+    public static List<Task> listTasksWithAlert(List<Task> tasks) {
+        return tasks.stream().filter(Task::isAlert).collect(toList());
+    }    
+
+    @ComputedProperty
+    public static int numberOfTasksWithAlert(List<Task> tasks) {
+        return listTasksWithAlert(tasks).size();
+    }     
     
     @Model(className = "Task", targetId = "", properties = {
         @Property(name = "id", type = int.class),
@@ -47,6 +69,9 @@ final class ViewModel {
         @Property(name = "completed", type = boolean.class)
     })
     public static class TaskModel {  
-
+        @Function
+        public static void markAsCompleted(boolean completed) {
+            completed = true;
+        }
     }
 }
