@@ -7,8 +7,8 @@
     </head>
     <body>
         <!-- ${browser.bootstrap} -->
-        <div data-bind="template: {name: 'task', if: editing()}"></div>
-        <div data-bind="template: {name: 'editor', if: !editing(), data: editing()}"></div>
+        <div data-bind="template: {name: 'task', if: !editing()}"></div>
+        <div data-bind="template: {name: 'editor', if: editing(), data: editing()}"></div>
         <script type="text/html" id="task">
         <h2>Tasks</h2>
         <div class="rTable">
@@ -47,13 +47,13 @@
             <!-- ko foreach: tasks -->
             <div class="rTableRow"> 
                 <div class="rTableCell" data-bind="text: priority, 
-                    style: { 'background-color': !completed ? 'green' : 'white' }"></div> 
+                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
                 <div class="rTableCell" data-bind="text: description, 
-                    style: { 'background-color': !completed ? 'green' : 'white' }"></div> 
+                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
                 <div class="rTableCell" data-bind="text: alert, 
-                    style: { 'background-color': !completed ? 'green' : 'white' }"></div> 
+                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
                 <div class="rTableCell" data-bind="text: dueDate, 
-                    style: { 'background-color': !completed ? 'green' : 'white' }"></div> 
+                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
                 <div class="rTableCell" >
                     <a href="edit.html" class="button">
                         <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>

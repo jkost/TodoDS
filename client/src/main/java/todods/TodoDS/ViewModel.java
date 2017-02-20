@@ -28,6 +28,7 @@ final class ViewModel {
         task.setDueDate("10/03/2017");
         task.setCompleted(false);
         TaskList taskList = new TaskList();
+        taskList.setEditing(null);
         taskList.getTasks().add(task);
         taskList.getTasks().add(new Task(2, "Book venue!", 7, "01/04/2017", false, 2, "", false));
         taskList.applyBindings();
