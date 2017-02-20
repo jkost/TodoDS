@@ -34,15 +34,25 @@ final class ViewModel {
         taskList.applyBindings();
     }
     
+    @Function 
+    static void addNew(TaskList tasks) {
+        tasks.setEditing(new Task());
+    }    
+    
     @Function
     public static void edit(TaskList tasks, Task data) {
-        tasks.setEditing(data);
+        tasks.setEditing(data.clone());
     }   
 
     @Function
     public static void commit(TaskList tasks, Task data) {
         tasks.setEditing(null);
-    }       
+    }     
+    
+    @Function 
+    static void cancel(TaskList tasks) {
+        tasks.setEditing(null);
+    }   
     
     @Function
     public static void removeTask(TaskList tasks, Task data) {

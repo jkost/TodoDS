@@ -16,7 +16,7 @@
             <div class="rTable">
                 <div class="rTableRow">
                     <div class="rTableCell">
-                        <a class="button" data-bind="submit: $root.edit">
+                        <a class="button" data-bind="click: $root.addNew">
                             <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
                         </a>
                         <a class="button">
@@ -105,7 +105,8 @@
                 </div>
                 <div class="pure-controls">
                     <button class="pure-button pure-button-primary" type="submit" data-bind="click: $root.commit">Save</button>
-                    <button class="pure-button" data-bind="click: $root.cancel" type="reset">Clear</button>
+                    <button class="pure-button" type="reset">Clear</button>
+                    <button class="pure-button" data-bind="click: $root.cancel" type="submit">Cancel</button>
                 </div>
             </fieldset>
         </form>
