@@ -12,7 +12,8 @@ import net.java.html.json.Property;
 import todods.TodoDS.js.Dialogs;
 
 @Model(className = "TaskList", targetId = "", properties = {
-    @Property(name = "editing", type = Task.class),
+    @Property(name = "selected", type = Task.class),
+    @Property(name = "edited", type = Task.class),
     @Property(name = "tasks", type = Task.class, array = true)
 })
 final class ViewModel {
@@ -28,7 +29,8 @@ final class ViewModel {
         task.setDueDate("10/03/2017");
         task.setCompleted(false);
         TaskList taskList = new TaskList();
-        taskList.setEditing(null);
+        taskList.setSelected(null);
+        taskList.setEdited(null);
         taskList.getTasks().add(task);
         taskList.getTasks().add(new Task(2, "Book venue!", 7, "01/04/2017", false, 2, "", false));
         taskList.applyBindings();
@@ -36,22 +38,33 @@ final class ViewModel {
     
     @Function 
     static void addNew(TaskList tasks) {
-        tasks.setEditing(new Task());
+        tasks.setSelected(null);
+        tasks.setEdited(new Task());
     }    
     
     @Function
     public static void edit(TaskList tasks, Task data) {
-        tasks.setEditing(data.clone());
+        tasks.setSelected(data);
+        tasks.setEdited(data.clone());
     }   
 
     @Function
-    public static void commit(TaskList tasks, Task data) {
-        tasks.setEditing(null);
+    public static void commit(TaskList tasks) {
+        final Task task = tasks.getEdited();
+        if (task == null) return;
+        final Task selectedTask = tasks.getSelected();
+        if (selectedTask != null) {
+            tasks.getTasks().set(tasks.getTasks().indexOf(selectedTask), task);
+        } else {
+            tasks.getTasks().add(task);
+        }
+        tasks.setEdited(null);
     }     
     
     @Function 
     static void cancel(TaskList tasks) {
-        tasks.setEditing(null);
+        tasks.setSelected(null);
+        tasks.setEdited(null);
     }   
     
     @Function

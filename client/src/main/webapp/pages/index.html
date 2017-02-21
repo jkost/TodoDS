@@ -9,8 +9,8 @@
     </head>
     <body>
         <!-- ${browser.bootstrap} -->
-        <div data-bind="template: {name: 'task', if: !editing()}"></div>
-        <div data-bind="template: {name: 'editor', if: editing(), data: editing()}"></div>
+        <div data-bind="template: {name: 'task', if: !edited()}"></div>
+        <div data-bind="template: {name: 'editor', if: edited(), data: edited()}"></div>
         <script type="text/html" id="task">
             <h2>Tasks</h2>
             <div class="rTable">
