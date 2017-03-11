@@ -50,3 +50,36 @@ a.button img {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+/*input[type=checkbox] {
+    display:none;
+}*/
+
+input[type=checkbox]:before {
+    display:none;
+    content:""; 
+    display:inline-block; 
+    width:16px;
+    height:16px;  
+    background-size: 100%;
+    padding: 0 0 0 0px;
+    /*background:url('../resources/icons/tasks_tsk.gif')  no-repeat;*/
+    background-color: lightgrey;
+    background-image: url('../resources/icons/tasks_tsk.gif');
+    /*transform: scale(1.5);*/
+    zoom: 1.5;
+    /*-webkit-transform: translate(-50%, -50%);*/
+    /*-ms-transform: translate(-50%, -50%);*/
+    transform: translate(-25%, -25%);  
+}
+
+input[type=checkbox]:checked:before {
+    /*    background: #0080FF;
+        height: 24px;
+        width: 24px;
+        display:inline-block;
+        padding: 0 0 0 0px;*/
+    border: 0.0625em solid rgb(192,192,192);
+    background-color: lightgrey;
+    background:url('../resources/icons/tasks_tsk.gif') no-repeat;
+}
