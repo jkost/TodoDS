@@ -23,6 +23,5 @@ import org.junit.runner.RunWith;
 )
 public class IntegrationTest {
     @Test public void testUIModelUI() {
-        Data model = new Data();
     }
 }

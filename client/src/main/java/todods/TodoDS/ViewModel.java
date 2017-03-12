@@ -2,9 +2,9 @@ package todods.TodoDS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ArrayList;
 import static java.util.stream.Collectors.toList;
 import net.java.html.json.ComputedProperty;
 import net.java.html.json.Function;
@@ -21,14 +21,13 @@ import todods.TodoDS.js.Dialogs;
     @Property(name = "sortByPriority", type = boolean.class)
 })
 final class ViewModel {
-    private static final List<Task> tasksList = new ArrayList<>();
 
     /**
      * Called when the page is ready.
      */
     static void onPageLoad() throws Exception {
         Task task = new Task();
-        task.setPriority(10);
+        task.setPriority(1);
         task.setDescription("Finish TodoDS article!");
         task.setAlert(true);
         task.setDueDate("10/03/2017");
@@ -38,78 +37,77 @@ final class ViewModel {
         taskList.setEdited(null);
         taskList.getTasks().add(task);
         taskList.getTasks().add(new Task(2, "Book venue!", 7, "01/04/2017", false, 2, "", false));
-        tasksList.addAll(taskList.getTasks());
+        taskList.getTasks().add(new Task(3, "A completed Task", 3, "01/04/2017", false, 2, "", true));
         taskList.applyBindings();
     }
-    
-    @Function 
+
+    @ComputedProperty
+    public static List<Task> sortedAndFilteredTasks(List<Task> tasks, boolean sortByPriority, boolean showCompleted) {
+        List<Task> result = new ArrayList<>();
+        if (showCompleted){ 
+          result.addAll(tasks.stream().filter(Task::isCompleted).collect(toList()));
+        }
+        else result.addAll(tasks);
+        
+        if (sortByPriority) {
+            result.sort(new PriorityComparator());
+        }       
+        return result;
+    }
+
+    @Function
     static void addNew(TaskList tasks) {
         tasks.setSelected(null);
         tasks.setEdited(new Task());
-    }    
-    
+    }
+
     @Function
     static void edit(TaskList tasks, Task data) {
         tasks.setSelected(data);
         tasks.setEdited(data.clone());
-    }   
+    }
 
     @Function
     static void commit(TaskList tasks) {
         final Task task = tasks.getEdited();
-        if (task == null) return;
+        if (task == null) {
+            return;
+        }
         final Task selectedTask = tasks.getSelected();
         if (selectedTask != null) {
             tasks.getTasks().set(tasks.getTasks().indexOf(selectedTask), task);
         } else {
             tasks.getTasks().add(task);
         }
-        tasksList.add(task);
         tasks.setEdited(null);
-    }     
-    
-    @Function 
+    }
+
+    @Function
     static void cancel(TaskList tasks) {
         tasks.setSelected(null);
         tasks.setEdited(null);
-    }   
-    
+    }
+
     @Function
     static void removeTask(TaskList tasks, Task data) {
         tasks.getTasks().remove(data);
-        tasksList.remove(data);
-    } 
-    
-    @Function 
+    }
+
+    @Function
     static void expiredTasks(final TaskList tasks) {
         Dialogs.showAlerts(listTasksWithAlert(tasks.getTasks()));
     }
-    
+
     private static List<Task> listTasksWithAlert(List<Task> tasks) {
         return tasks.stream().filter(Task::isAlert).collect(toList());
-    }    
+    }
 
     @ComputedProperty
     static int numberOfTasksWithAlert(List<Task> tasks) {
         return listTasksWithAlert(tasks).size();
-    }     
-    
-    @OnPropertyChange("showCompleted")
-    static void showCompleted(final TaskList tasks) {
-        tasks.getTasks().clear();
-        if (tasks.isShowCompleted()) {
-            tasks.getTasks().addAll(tasksList.stream().filter(Task::isCompleted).collect(toList()));
-        } else {
-            tasks.getTasks().addAll(tasksList);
-        }
-    }    
-    
-    @OnPropertyChange("sortByPriority")
-    static void sortBy(final TaskList tasks) {
-        tasks.getTasks().sort(tasks.isSortByPriority() ? 
-                new PriorityComparator() : new DueDateComparator());
-    }    
-    
+    }
+
+   
     private static class PriorityComparator implements Comparator<Task> {
 
         @Override
@@ -122,7 +120,7 @@ final class ViewModel {
                 return -1;
             }
         }
-    }    
+    }
 
     private static class DueDateComparator implements Comparator<Task> {
 
@@ -134,8 +132,8 @@ final class ViewModel {
                     DateTimeFormatter.ofPattern("d/MM/yyyy"));
             return t1DateDue.compareTo(t2DateDue);
         }
-    }    
-    
+    }
+
     @Model(className = "Task", targetId = "", properties = {
         @Property(name = "id", type = int.class),
         @Property(name = "description", type = String.class),
@@ -146,12 +144,13 @@ final class ViewModel {
         @Property(name = "obs", type = String.class),
         @Property(name = "completed", type = boolean.class)
     })
-    public static class TaskModel {  
+    public static class TaskModel {
+
         @OnPropertyChange("completed")
         static void markAsCompleted(final Task task) {
             task.setCompleted(task.isCompleted());
         }
-        
+
         @ComputedProperty
         public static boolean isLate(String dueDate) {
             if (dueDate == null || dueDate.isEmpty()) {

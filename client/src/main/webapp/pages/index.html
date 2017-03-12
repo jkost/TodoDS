@@ -6,11 +6,6 @@
         <link rel="stylesheet" href="index.css">
         <link href="pure-release-0.6.2/pure-min.css" rel="stylesheet"/>
         <link href="pure-release-0.6.2/grids-responsive-min.css" rel="stylesheet"/>
-        <script>
-            function toggleCheckbox(element) {
-                element.checked = !element.checked;
-            }
-        </script>
     </head>
 <body>
     <!-- ${browser.bootstrap} -->
@@ -21,16 +16,16 @@
         <div class="rTable">
             <div class="rTableRow">
                 <div class="rTableCell">
-                    <a class="button" data-bind="click: $root.addNew">
+                    <a class="button" data-bind="click: addNew">
                         <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
                     </a>
-                    <input type="checkbox" name ="tglShowCompleted" checked="showCompleted" data-bind="checked: $root.showCompleted"/><label for="tglShowCompleted"></label> 
+                    <input type="checkbox" name ="tglShowCompleted" checked="showCompleted" data-bind="checked: showCompleted"/><label for="tglShowCompleted"></label> 
                         <!--<img src="../resources/icons/tasks_tsk.gif" alt="Show Completed Tasks" title="Show Completed Tasks"/>-->
-                    <input type="checkbox" name ="tglSortByPriority" checked="sortByPriority" data-bind="checked: $root.sortBy"/><label for="tglSortByPriority"></label>     
+                    <input type="checkbox" name ="tglSortByPriority" checked="sortByPriority" data-bind="checked: sortByPriority"/><label for="tglSortByPriority"></label>     
                     <!--<a class="button" type="checkbox" data-bind="click: $root.sortBy" onclick="toggleCheckbox(this)">-->
                         <!--<img src="../resources/icons/next_nav.gif" alt="Sort By Priority" title="Sort By Priority"/>-->
                     <!--</a>-->
-                    <a class="button" data-bind="click: $root.expiredTasks">
+                    <a class="button" data-bind="click: expiredTasks">
                         <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
                     </a>
                 </div>   
@@ -51,7 +46,7 @@
                     <strong>Due Date</strong>
                 </div>
             </div>
-            <!-- ko foreach: tasks -->
+            <!-- ko foreach: sortedAndFilteredTasks -->
             <div class="rTableRow"> 
                 <div class="rTableCell" data-bind="text: priority, 
                     style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
