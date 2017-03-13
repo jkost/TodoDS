@@ -49,13 +49,13 @@
             <!-- ko foreach: sortedAndFilteredTasks -->
             <div class="rTableRow"> 
                 <div class="rTableCell" data-bind="text: priority, 
-                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
             <div class="rTableCell" data-bind="text: description, 
-                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
             <div class="rTableCell" data-bind="text: alert, 
-                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" data-bind="text: dueDate, 
-                    style: { 'background-color': !completed ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" >
                         <a class="button" data-bind="click: $root.edit">
                             <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
@@ -66,7 +66,7 @@
 <!--                        <a class="button" data-bind="click: $data.markAsCompleted">
                             <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
                         </a>-->
-                        <input type="checkbox" name ="tglMarkAsCompleted" checked="completed" data-bind="checked: $data.markAsCompleted"/><label for="tglMarkAsCompleted"></label>
+                        <input type="checkbox" name ="tglMarkAsCompleted" checked="completed" data-bind="checked: completed"/><label for="tglMarkAsCompleted"></label>
                     </div> 
                 </div>
                 <!-- /ko -->
