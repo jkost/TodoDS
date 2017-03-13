@@ -7,52 +7,62 @@
         <link href="pure-release-0.6.2/pure-min.css" rel="stylesheet"/>
         <link href="pure-release-0.6.2/grids-responsive-min.css" rel="stylesheet"/>
     </head>
-<body>
-    <!-- ${browser.bootstrap} -->
-    <div data-bind="template: {name: 'task', if: !edited()}"></div>
-    <div data-bind="template: {name: 'editor', if: edited(), data: edited()}"></div>
-    <script type="text/html" id="task">
-        <h2>Tasks</h2>
-        <div class="rTable">
-            <div class="rTableRow">
-                <div class="rTableCell">
-                    <a class="button" data-bind="click: addNew">
-                        <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
-                    </a>
-                    <input type="checkbox" name ="tglShowCompleted" checked="showCompleted" data-bind="checked: showCompleted"/><label for="tglShowCompleted"></label> 
+    <body>
+        <span data-bind="text: dialog"></span>
+        <div id="popup1" class="overlay" data-bind="visible: dialog, style: {opacity: dialog ? 1 : 0}">
+            <div class="popup">
+                <h2>Here i am</h2>
+                <a class="close" href="#" data-bind="click: hideDialog">&times;</a>
+                <div class="content">
+                    <span data-bind="text: message"></span>
+                </div>
+            </div>
+        </div>
+        <!-- ${browser.bootstrap} -->
+        <div data-bind="template: {name: 'task', if: !edited()}"></div>
+        <div data-bind="template: {name: 'editor', if: edited(), data: edited()}"></div>
+        <script type="text/html" id="task">
+            <h2>Tasks</h2>
+            <div class="rTable">
+                <div class="rTableRow">
+                    <div class="rTableCell">
+                        <a class="button" data-bind="click: addNew">
+                            <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
+                        </a>
+                        <input type="checkbox" name ="tglShowCompleted" checked="showCompleted" data-bind="checked: showCompleted"/><label for="tglShowCompleted"></label> 
                         <!--<img src="../resources/icons/tasks_tsk.gif" alt="Show Completed Tasks" title="Show Completed Tasks"/>-->
-                    <input type="checkbox" name ="tglSortByPriority" checked="sortByPriority" data-bind="checked: sortByPriority"/><label for="tglSortByPriority"></label>     
-                    <!--<a class="button" type="checkbox" data-bind="click: $root.sortBy" onclick="toggleCheckbox(this)">-->
+                        <input type="checkbox" name ="tglSortByPriority" checked="sortByPriority" data-bind="checked: sortByPriority"/><label for="tglSortByPriority"></label>     
+                        <!--<a class="button" type="checkbox" data-bind="click: $root.sortBy" onclick="toggleCheckbox(this)">-->
                         <!--<img src="../resources/icons/next_nav.gif" alt="Sort By Priority" title="Sort By Priority"/>-->
-                    <!--</a>-->
-                    <a class="button" data-bind="click: expiredTasks">
-                        <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
-                    </a>
-                </div>   
-            </div>
-        </div>          
-        <div class="rTable"> 
-            <div class="rTableRow"> 
-                <div class="rTableHead">
-                    <strong>Priority</strong>
-                </div> 
-                <div class="rTableHead">
-                    <span style="font-weight: bold;">Description</span>
-                </div> 
-                <div class="rTableHead">
-                    <strong>Alert?</strong>
+                        <!--</a>-->
+                        <a class="button" data-bind="click: expiredTasks">
+                            <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
+                        </a>
+                    </div>   
                 </div>
-                <div class="rTableHead">
-                    <strong>Due Date</strong>
+            </div>          
+            <div class="rTable"> 
+                <div class="rTableRow"> 
+                    <div class="rTableHead">
+                        <strong>Priority</strong>
+                    </div> 
+                    <div class="rTableHead">
+                        <span style="font-weight: bold;">Description</span>
+                    </div> 
+                    <div class="rTableHead">
+                        <strong>Alert?</strong>
+                    </div>
+                    <div class="rTableHead">
+                        <strong>Due Date</strong>
+                    </div>
                 </div>
-            </div>
-            <!-- ko foreach: sortedAndFilteredTasks -->
-            <div class="rTableRow"> 
-                <div class="rTableCell" data-bind="text: priority, 
+                <!-- ko foreach: sortedAndFilteredTasks -->
+                <div class="rTableRow"> 
+                    <div class="rTableCell" data-bind="text: priority, 
                     style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
-            <div class="rTableCell" data-bind="text: description, 
+                    <div class="rTableCell" data-bind="text: description, 
                     style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
-            <div class="rTableCell" data-bind="text: alert, 
+                    <div class="rTableCell" data-bind="text: alert, 
                     style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" data-bind="text: dueDate, 
                     style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
@@ -63,9 +73,9 @@
                         <a class="button" data-bind="click: $root.removeTask">
                             <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
                         </a>
-<!--                        <a class="button" data-bind="click: $data.markAsCompleted">
-                            <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
-                        </a>-->
+                        <!--                        <a class="button" data-bind="click: $data.markAsCompleted">
+                                                    <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
+                                                </a>-->
                         <input type="checkbox" name ="tglMarkAsCompleted" checked="completed" data-bind="checked: completed"/><label for="tglMarkAsCompleted"></label>
                     </div> 
                 </div>
@@ -112,5 +122,6 @@
             </fieldset>
         </form>
     </script>  
+
 </body>
 </html>

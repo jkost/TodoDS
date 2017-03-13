@@ -18,7 +18,9 @@ import todods.TodoDS.js.Dialogs;
     @Property(name = "edited", type = Task.class),
     @Property(name = "tasks", type = Task.class, array = true),
     @Property(name = "showCompleted", type = boolean.class),
-    @Property(name = "sortByPriority", type = boolean.class)
+    @Property(name = "sortByPriority", type = boolean.class),
+    @Property(name = "dialog", type = boolean.class),
+    @Property(name = "message", type = String.class)
 })
 final class ViewModel {
 
@@ -44,14 +46,15 @@ final class ViewModel {
     @ComputedProperty
     public static List<Task> sortedAndFilteredTasks(List<Task> tasks, boolean sortByPriority, boolean showCompleted) {
         List<Task> result = new ArrayList<>();
-        if (showCompleted){ 
-          result.addAll(tasks.stream().filter(Task::isCompleted).collect(toList()));
+        if (showCompleted) {
+            result.addAll(tasks.stream().filter(Task::isCompleted).collect(toList()));
+        } else {
+            result.addAll(tasks);
         }
-        else result.addAll(tasks);
-        
+
         if (sortByPriority) {
             result.sort(new PriorityComparator());
-        }       
+        }
         return result;
     }
 
@@ -95,7 +98,20 @@ final class ViewModel {
 
     @Function
     static void expiredTasks(final TaskList tasks) {
-        Dialogs.showAlerts(listTasksWithAlert(tasks.getTasks()));
+        List<Task> listTasksWithAlert = listTasksWithAlert(tasks.getTasks());
+        for (Task task : listTasksWithAlert) {
+            showExpiredTask(tasks, task);
+        }
+    }
+
+    private static void showExpiredTask(TaskList tasks, Task task) {
+        tasks.setMessage("Task: " + task.getDescription() + "\nexpired on " + task.getDueDate());
+        tasks.setDialog(true);     
+    }
+    
+    @Function
+    public static void hideDialog(final TaskList tasks){
+        tasks.setDialog(false);
     }
 
     private static List<Task> listTasksWithAlert(List<Task> tasks) {
@@ -107,7 +123,6 @@ final class ViewModel {
         return listTasksWithAlert(tasks).size();
     }
 
-   
     private static class PriorityComparator implements Comparator<Task> {
 
         @Override
