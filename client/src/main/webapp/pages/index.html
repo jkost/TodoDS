@@ -6,12 +6,12 @@
         <link rel="stylesheet" href="index.css">
         <link href="pure-release-0.6.2/pure-min.css" rel="stylesheet"/>
         <link href="pure-release-0.6.2/grids-responsive-min.css" rel="stylesheet"/>
+        <script src="formValidation.js"></script> 
     </head>
     <body>
-        <span data-bind="text: dialog"></span>
         <div id="popup1" class="overlay" data-bind="visible: dialog, style: {opacity: dialog ? 1 : 0}">
             <div class="popup">
-                <h2>Here i am</h2>
+                <h2>Alert</h2>
                 <a class="close" href="#" data-bind="click: hideDialog">&times;</a>
                 <div class="content">
                     <span data-bind="text: message"></span>
@@ -23,23 +23,33 @@
         <div data-bind="template: {name: 'editor', if: edited(), data: edited()}"></div>
         <script type="text/html" id="task">
             <h2>Tasks</h2>
-            <div class="rTable">
-                <div class="rTableRow">
-                    <div class="rTableCell">
+            <div class="pure-menu pure-menu-horizontal">
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item pure-menu-selected">
                         <a class="button" data-bind="click: addNew">
                             <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
                         </a>
-                        <input type="checkbox" name ="tglShowCompleted" checked="showCompleted" data-bind="checked: showCompleted"/><label for="tglShowCompleted"></label> 
-                        <!--<img src="../resources/icons/tasks_tsk.gif" alt="Show Completed Tasks" title="Show Completed Tasks"/>-->
-                        <input type="checkbox" name ="tglSortByPriority" checked="sortByPriority" data-bind="checked: sortByPriority"/><label for="tglSortByPriority"></label>     
-                        <!--<a class="button" type="checkbox" data-bind="click: $root.sortBy" onclick="toggleCheckbox(this)">-->
-                        <!--<img src="../resources/icons/next_nav.gif" alt="Sort By Priority" title="Sort By Priority"/>-->
-                        <!--</a>-->
+                    </li>
+                    <li class="pure-menu-item pure-menu-selected">
+                        <label for="tglShowCompleted" class="showCompletedCheckbox" title="Show Completed...">
+                            <span class="showCompletedCheckbox">
+                                <input id="tglShowCompleted" type="checkbox" name ="tglShowCompleted" checked="showCompleted" data-bind="checked: showCompleted"/>
+                            </span>
+                        </label> 
+                    </li>
+                    <li class="pure-menu-item pure-menu-selected">    
+                        <label for="tglSortByPriority" class="sortByCheckbox" title="Sort By Priority...">
+                            <span class="sortByCheckbox">
+                                <input id="tglSortByPriority" type="checkbox" name ="tglSortByPriority" checked="sortByPriority" data-bind="checked: sortByPriority"/>
+                            </span>
+                        </label>
+                    </li>
+                    <li class="pure-menu-item pure-menu-selected">
                         <a class="button" data-bind="click: expiredTasks">
                             <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
                         </a>
-                    </div>   
-                </div>
+                    </li>   
+                </ul>
             </div>          
             <div class="rTable"> 
                 <div class="rTableRow"> 
@@ -67,16 +77,23 @@
                     <div class="rTableCell" data-bind="text: dueDate, 
                     style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" >
-                        <a class="button" data-bind="click: $root.edit">
-                            <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
-                        </a>
-                        <a class="button" data-bind="click: $root.removeTask">
-                            <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
-                        </a>
-                        <!--                        <a class="button" data-bind="click: $data.markAsCompleted">
-                                                    <img src="../resources/icons/complete_tsk.gif" alt="Mark As Completed" title="Mark As Completed"/>
-                                                </a>-->
-                        <input type="checkbox" name ="tglMarkAsCompleted" checked="completed" data-bind="checked: completed"/><label for="tglMarkAsCompleted"></label>
+                        <div class="pure-menu pure-menu-horizontal">
+                            <ul class="pure-menu-list">
+                                <li class="pure-menu-item pure-menu-selected">
+                                    <a class="button" data-bind="click: $root.edit">
+                                        <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
+                                    </a>
+                                </li>
+                                <li class="pure-menu-item pure-menu-selected">
+                                    <a class="button" data-bind="click: $root.removeTask">
+                                        <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
+                                    </a>
+                                </li>
+                                <li class="pure-menu-item pure-menu-selected">
+                                    <input id="tglMarkAsCompleted" type="checkbox" name ="tglMarkAsCompleted" checked="completed" data-bind="checked: completed"/><label for="tglMarkAsCompleted"></label>
+                                </li>
+                            </ul>
+                        </div>
                     </div> 
                 </div>
                 <!-- /ko -->
@@ -85,43 +102,45 @@
             <div class="rTableFoot">There are <label data-bind="text: $data.numberOfTasksWithAlert"/></label> task(s) with alerts today.</div>
     </script>
     <script type="text/html" id="editor">
-        <h2>Create/Edit Task</h2>
-        <form id="contact-form" class="pure-form pure-form-aligned">
+        <form id="edit-form" class="pure-form pure-form-aligned">
             <fieldset> 
+                <legend><h2>Create/Edit Task</h2></legend>
                 <div class="pure-control-group">
                     <label for="description">Description:</label>
-                    <input class="pure-input-1-2" type="text" placeholder="Description" data-bind="textInput: description" required></input>
+                    <input id="description" class="pure-input-1-2" type="text" placeholder="Description" data-bind="textInput: description" required></input>
                 </div>
                 <div class="pure-control-group">
                     <label for="priority">Priority:</label>
-                    <input class="pure-input-1-2" type="number" placeholder="Priority" min="0" max="10" data-bind="textInput: priority"></input>
+                    <input id="priority" class="pure-input-1-2" type="number" placeholder="Priority" min="1" max="10" data-bind="textInput: priority" required></input>
                 </div>
                 <div class="pure-control-group">
                     <label for="dueDate">Due Date:</label>
-                    <input class="pure-input-1-2" type="text" placeholder="Due Date" data-bind="textInput: dueDate" required></input>
+                    <input id="dueDate" class="pure-input-1-2" type="date" placeholder="Due Date" data-bind="textInput: dueDate" required></input>
                 </div>
                 <div class="pure-control-group">
-                    <input type="checkbox" data-bind="checked: alert"></input>
-                    <label for="alert">Show alert:</label>
-                    <input class="pure-input-1-3" type="number" min="0" max="365" data-bind="textInput: daysBefore">
-                    </input><label for="daysBefore"> days before</label>
+                    <label for="alert" class="pure-checkbox">
+                        <input id="alert" type="checkbox" data-bind="checked: alert"></input>Show alert:
+                    </label>
+                    <input class="pure-input-1-3" type="number" min="0" max="365" data-bind="textInput: daysBefore"></input>
+                    <span class="pure-form-message-inline">days before</span>
                 </div>
                 <div class="pure-control-group">
                     <label for="obs">Obs:</label>
-                    <textarea class="pure-input-1-2" rows="4" cols="50" data-bind="textInput: obs"></textarea>
+                    <textarea id="obs" class="pure-input-1-2" rows="4" cols="50" placeholder="Obs" data-bind="textInput: obs"></textarea>
                 </div>
                 <div class="pure-control-group">
-                    <input type="checkbox" data-bind="checked: completed"></input>
-                    <label for="completed">Completed Task</label>
+                    <label for="completed">
+                        <input id="completed" type="checkbox" data-bind="checked: completed"></input>Completed Task
+                    </label>
                 </div>
                 <div class="pure-controls">
                     <button class="pure-button pure-button-primary" type="submit" data-bind="click: $root.commit">Save</button>
                     <button class="pure-button" type="reset">Clear</button>
                     <button class="pure-button" data-bind="click: $root.cancel" type="submit">Cancel</button>
                 </div>
+                <div class="warning" data-bind="text: validate"></div>
             </fieldset>
         </form>
     </script>  
-
 </body>
 </html>

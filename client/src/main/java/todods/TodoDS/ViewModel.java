@@ -9,9 +9,7 @@ import static java.util.stream.Collectors.toList;
 import net.java.html.json.ComputedProperty;
 import net.java.html.json.Function;
 import net.java.html.json.Model;
-import net.java.html.json.OnPropertyChange;
 import net.java.html.json.Property;
-import todods.TodoDS.js.Dialogs;
 
 @Model(className = "TaskList", targetId = "", properties = {
     @Property(name = "selected", type = Task.class),
@@ -54,6 +52,8 @@ final class ViewModel {
 
         if (sortByPriority) {
             result.sort(new PriorityComparator());
+        } else {
+            result.sort(new DueDateComparator());            
         }
         return result;
     }
@@ -76,6 +76,7 @@ final class ViewModel {
         if (task == null) {
             return;
         }
+        if (!validate(task)) return;
         final Task selectedTask = tasks.getSelected();
         if (selectedTask != null) {
             tasks.getTasks().set(tasks.getTasks().indexOf(selectedTask), task);
@@ -83,6 +84,14 @@ final class ViewModel {
             tasks.getTasks().add(task);
         }
         tasks.setEdited(null);
+    }
+    
+    private static boolean validate(Task task) {
+        String invalid = null;
+        if (task.getValidate() != null) {
+            invalid = task.getValidate();
+        }
+        return invalid == null;
     }
 
     @Function
@@ -161,11 +170,6 @@ final class ViewModel {
     })
     public static class TaskModel {
 
-        @OnPropertyChange("completed")
-        static void markAsCompleted(final Task task) {
-            task.setCompleted(task.isCompleted());
-        }
-
         @ComputedProperty
         public static boolean isLate(String dueDate) {
             if (dueDate == null || dueDate.isEmpty()) {
@@ -190,5 +194,24 @@ final class ViewModel {
                 return dias <= daysBefore;
             }
         }
+        
+        @ComputedProperty
+        static String validate(String description, int priority, String dueDate, int daysBefore) {
+            String errorMsg = null;
+            if (description == null || description.isEmpty()) {
+                errorMsg = "Specify a description";
+            }
+            if (errorMsg == null && (priority < 1 || priority > 10)) {
+                errorMsg = "Priority must be an integer in the range 1-10";
+            }
+            if (errorMsg == null && dueDate != null) {
+                errorMsg = "Specify a valid due date";
+            }
+            if (errorMsg == null && (daysBefore < 0 || daysBefore > 365)) {
+                errorMsg = "Days before must be an integer in the range 0-365";
+            }
+
+            return errorMsg;
+        }      
     }
 }
