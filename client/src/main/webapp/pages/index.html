@@ -25,7 +25,7 @@
             <div class="pure-menu pure-menu-horizontal">
                 <ul class="pure-menu-list">
                     <li class="pure-menu-item pure-menu-selected">
-                        <a class="button" data-bind="click: addNew">
+                        <a class="pure-button" data-bind="click: addNew">
                             <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
                         </a>
                     </li>
@@ -44,7 +44,7 @@
                         </label>
                     </li>
                     <li class="pure-menu-item pure-menu-selected">
-                        <a class="button" data-bind="click: expiredTasks">
+                        <a class="pure-button" data-bind="click: expiredTasks">
                             <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
                         </a>
                     </li>   
@@ -79,17 +79,17 @@
                         <div class="pure-menu pure-menu-horizontal">
                             <ul class="pure-menu-list">
                                 <li class="pure-menu-item pure-menu-selected">
-                                    <a class="button" data-bind="click: $root.edit">
+                                    <a class="pure-button" data-bind="click: $root.edit">
                                         <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
                                     </a>
                                 </li>
                                 <li class="pure-menu-item pure-menu-selected">
-                                    <a class="button" data-bind="click: $root.removeTask">
+                                    <a class="pure-button" data-bind="click: $root.removeTask">
                                         <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
                                     </a>
                                 </li>
                                 <li class="pure-menu-item pure-menu-selected">
-                                    <input id="tglMarkAsCompleted" type="checkbox" name ="tglMarkAsCompleted" title="Completed..." checked="completed" data-bind="checked: completed"/><label for="tglMarkAsCompleted"></label>
+                                    <input id="tglMarkAsCompleted" type="checkbox" name ="tglMarkAsCompleted" title="Mark As Completed..." checked="completed" data-bind="checked: completed"/>
                                 </li>
                             </ul>
                         </div>
@@ -110,17 +110,17 @@
                 </div>
                 <div class="pure-control-group">
                     <label for="priority">Priority:</label>
-                    <input id="priority" class="pure-input-1-2" type="number" placeholder="Priority" min="1" max="10" data-bind="textInput: priority" required></input>
+                    <input id="priority" class="pure-input-1-2" type="number" placeholder="1-10" min="1" max="10" data-bind="textInput: priority" required></input>
                 </div>
                 <div class="pure-control-group">
                     <label for="dueDate">Due Date:</label>
-                    <input id="dueDate" class="pure-input-1-2" type="text" placeholder="Due Date" data-bind="textInput: dueDate" required></input>
+                    <input id="dueDate" class="pure-input-1-2" type="text" placeholder="dd/mm/yyyy" pattern="\d{1,2}/\d{1,2}/\d{4}" data-bind="textInput: dueDate" required></input>
                 </div>
                 <div class="pure-control-group">
                     <label for="alert" class="pure-checkbox">
                         <input id="alert" type="checkbox" data-bind="checked: alert"></input>Show alert:
                     </label>
-                    <input class="pure-input-1-3" type="number" min="0" max="365" data-bind="textInput: daysBefore"></input>
+                    <input class="pure-input-1-3" type="number" min="0" max="365" placeholder="0-365" data-bind="textInput: daysBefore"></input>
                     <span class="pure-form-message-inline">days before</span>
                 </div>
                 <div class="pure-control-group">
