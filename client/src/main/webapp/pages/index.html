@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="index.css">
         <link href="pure-release-0.6.2/pure-min.css" rel="stylesheet"/>
         <link href="pure-release-0.6.2/grids-responsive-min.css" rel="stylesheet"/>
-        <script src="formValidation.js"></script> 
     </head>
     <body>
         <div id="popup1" class="overlay" data-bind="visible: dialog, style: {opacity: dialog ? 1 : 0}">
@@ -69,13 +68,13 @@
                 <!-- ko foreach: sortedAndFilteredTasks -->
                 <div class="rTableRow"> 
                     <div class="rTableCell" data-bind="text: priority, 
-                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" data-bind="text: description, 
-                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" data-bind="text: alert, 
-                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" data-bind="text: dueDate, 
-                    style: { 'background-color': !completed() ? 'orange' : 'white' }"></div> 
+                    style: { 'background-color': completed() ? 'orange' : 'white' }"></div> 
                     <div class="rTableCell" >
                         <div class="pure-menu pure-menu-horizontal">
                             <ul class="pure-menu-list">
@@ -90,7 +89,7 @@
                                     </a>
                                 </li>
                                 <li class="pure-menu-item pure-menu-selected">
-                                    <input id="tglMarkAsCompleted" type="checkbox" name ="tglMarkAsCompleted" checked="completed" data-bind="checked: completed"/><label for="tglMarkAsCompleted"></label>
+                                    <input id="tglMarkAsCompleted" type="checkbox" name ="tglMarkAsCompleted" title="Completed..." checked="completed" data-bind="checked: completed"/><label for="tglMarkAsCompleted"></label>
                                 </li>
                             </ul>
                         </div>
@@ -115,7 +114,7 @@
                 </div>
                 <div class="pure-control-group">
                     <label for="dueDate">Due Date:</label>
-                    <input id="dueDate" class="pure-input-1-2" type="date" placeholder="Due Date" data-bind="textInput: dueDate" required></input>
+                    <input id="dueDate" class="pure-input-1-2" type="text" placeholder="Due Date" data-bind="textInput: dueDate" required></input>
                 </div>
                 <div class="pure-control-group">
                     <label for="alert" class="pure-checkbox">

@@ -2,6 +2,7 @@ package todods.TodoDS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -204,8 +205,18 @@ final class ViewModel {
             if (errorMsg == null && (priority < 1 || priority > 10)) {
                 errorMsg = "Priority must be an integer in the range 1-10";
             }
-            if (errorMsg == null && dueDate != null) {
-                errorMsg = "Specify a valid due date";
+            if (errorMsg == null) {
+                if (dueDate == null) {
+                    errorMsg = "Specify a valid due date";
+                } else {
+                    try {
+                    LocalDate dateDue = LocalDate.parse(dueDate,
+                        DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                    if (dateDue == null) errorMsg = "Specify a valid due date";
+                    } catch (DateTimeParseException e) {
+                        errorMsg = "Specify a valid due date";
+                    }
+                }
             }
             if (errorMsg == null && (daysBefore < 0 || daysBefore > 365)) {
                 errorMsg = "Days before must be an integer in the range 0-365";
