@@ -11,4 +11,7 @@ public final class Dialogs {
     private Dialogs() {
     }
     
+    @JavaScriptBody(args = {  }, body = "datePickerInit();")
+    public static native void initDatePicker();
+    
 }

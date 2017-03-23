@@ -1,8 +1,5 @@
 package todods.TodoDS;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,6 +8,8 @@ import net.java.html.json.ComputedProperty;
 import net.java.html.json.Function;
 import net.java.html.json.Model;
 import net.java.html.json.Property;
+import todods.TodoDS.js.Calendar;
+import todods.TodoDS.js.Calendar.LocalDate;
 
 @Model(className = "TaskList", targetId = "", properties = {
     @Property(name = "selected", type = Task.class),
@@ -27,6 +26,7 @@ final class ViewModel {
      * Called when the page is ready.
      */
     static void onPageLoad() throws Exception {
+        Calendar.create();
         Task task = new Task();
         task.setPriority(1);
         task.setDescription("Finish TodoDS article!");
@@ -151,10 +151,8 @@ final class ViewModel {
 
         @Override
         public int compare(final Task t1, final Task t2) {
-            LocalDate t1DateDue = LocalDate.parse(t1.getDueDate(),
-                    DateTimeFormatter.ofPattern("d/MM/yyyy"));
-            LocalDate t2DateDue = LocalDate.parse(t2.getDueDate(),
-                    DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            LocalDate t1DateDue = LocalDate.parse(t1.getDueDate(),"d/MM/yyyy");
+            LocalDate t2DateDue = LocalDate.parse(t2.getDueDate(),"d/MM/yyyy");
             return t1DateDue.compareTo(t2DateDue);
         }
     }
@@ -176,8 +174,7 @@ final class ViewModel {
             if (dueDate == null || dueDate.isEmpty()) {
                 return false;
             }
-            LocalDate dateDue = LocalDate.parse(dueDate,
-                    DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            LocalDate dateDue = LocalDate.parse(dueDate,"d/MM/yyyy");
             return (dateDue == null) ? false : dateDue.compareTo(LocalDate.now()) < 0;
         }
 
@@ -186,8 +183,7 @@ final class ViewModel {
             if (dueDate == null || dueDate.isEmpty()) {
                 return false;
             }
-            LocalDate dateDue = LocalDate.parse(dueDate,
-                    DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            LocalDate dateDue = LocalDate.parse(dueDate,"d/MM/yyyy");
             if (!alert || dateDue == null) {
                 return false;
             } else {
@@ -209,13 +205,10 @@ final class ViewModel {
                 if (dueDate == null) {
                     errorMsg = "Specify a valid due date";
                 } else {
-                    try {
-                    LocalDate dateDue = LocalDate.parse(dueDate,
-                        DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                    
+                    LocalDate dateDue = LocalDate.parse(dueDate,"d/MM/yyyy");
                     if (dateDue == null) errorMsg = "Specify a valid due date";
-                    } catch (DateTimeParseException e) {
-                        errorMsg = "Specify a valid due date";
-                    }
+                    
                 }
             }
             if (errorMsg == null && (daysBefore < 0 || daysBefore > 365)) {
