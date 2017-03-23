@@ -46,7 +46,9 @@ final class ViewModel {
     public static List<Task> sortedAndFilteredTasks(List<Task> tasks, boolean sortByPriority, boolean showCompleted) {
         List<Task> result = new ArrayList<>();
         if (showCompleted) {
-            result.addAll(tasks.stream().filter(Task::isCompleted).collect(toList()));
+            for (Task task : tasks) {
+                if(task.isCompleted()) result.add(task);
+            }
         } else {
             result.addAll(tasks);
         }
@@ -125,7 +127,11 @@ final class ViewModel {
     }
 
     private static List<Task> listTasksWithAlert(List<Task> tasks) {
-        return tasks.stream().filter(Task::isAlert).collect(toList());
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.isAlert()) result.add(task);
+        }
+        return  result;
     }
 
     @ComputedProperty
