@@ -3,7 +3,6 @@ package todods.TodoDS;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 import net.java.html.json.ComputedProperty;
 import net.java.html.json.Function;
 import net.java.html.json.Model;
