@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <!-- ${browser.bootstrap} -->
+
         <div data-bind="template: {name: 'task', if: !edited()}"></div>
         <div data-bind="template: {name: 'editor', if: edited(), data: edited()}"></div>
         <script type="text/html" id="task">
@@ -26,7 +26,7 @@
                 <ul class="pure-menu-list">
                     <li class="pure-menu-item pure-menu-selected">
                         <a class="pure-button" data-bind="click: addNew">
-                            <img src="../resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
+                            <img src="./resources/icons/add_obj.gif" alt="Add Task..." title="Add Task..."/>
                         </a>
                     </li>
                     <li class="pure-menu-item pure-menu-selected">
@@ -45,7 +45,7 @@
                     </li>
                     <li class="pure-menu-item pure-menu-selected">
                         <a class="pure-button" data-bind="click: expiredTasks">
-                            <img src="../resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
+                            <img src="./resources/icons/warning.gif" alt="Show Alerts..." title="Show Alerts..."/>
                         </a>
                     </li>   
                 </ul>
@@ -80,12 +80,12 @@
                             <ul class="pure-menu-list">
                                 <li class="pure-menu-item pure-menu-selected">
                                     <a class="pure-button" data-bind="click: $root.edit">
-                                        <img src="../resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
+                                        <img src="./resources/icons/configs.gif" alt="Edit Task..." title="Edit Task..."/>
                                     </a>
                                 </li>
                                 <li class="pure-menu-item pure-menu-selected">
                                     <a class="pure-button" data-bind="click: $root.removeTask">
-                                        <img src="../resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
+                                        <img src="./resources/icons/delete_edit.gif" alt="Remove Task..." title="Remove Task..."/>
                                     </a>
                                 </li>
                                 <li class="pure-menu-item pure-menu-selected">
@@ -141,5 +141,6 @@
             </fieldset>
         </form>
     </script>  
+    <!-- ${browser.bootstrap} -->
 </body>
 </html>

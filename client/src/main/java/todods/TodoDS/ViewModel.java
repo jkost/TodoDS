@@ -53,9 +53,9 @@ final class ViewModel {
         }
 
         if (sortByPriority) {
-            result.sort(new PriorityComparator());
+//            result.sort(new PriorityComparator());
         } else {
-            result.sort(new DueDateComparator());            
+//            result.sort(new DueDateComparator());            
         }
         return result;
     }
@@ -192,8 +192,9 @@ final class ViewModel {
             if (!alert || dateDue == null) {
                 return false;
             } else {
-                int dias = dateDue.getDayOfYear() - LocalDate.now().getDayOfYear();
-                return dias <= daysBefore;
+//                int dias = dateDue.getDayOfYear() - LocalDate.now().getDayOfYear();
+//                return dias <= daysBefore;
+            return true;
             }
         }
         

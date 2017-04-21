@@ -23,7 +23,7 @@ public class Calendar {
             + "return cd.format('dddd - DD. MMMM YY');")
     public static native String format(String day);
 
-    @JavaScriptBody(args = {}, body = "return moment();")
+    @JavaScriptBody(args = {}, body = "var m = {}; m.m = moment(); return m;")
     public static native Object create();
 
     public static class LocalDate {
@@ -34,11 +34,11 @@ public class Calendar {
 
         Object delegate;
 
-        public LocalDate() {
+        LocalDate() {
             this(Calendar.create());
         }
 
-        public LocalDate(Object delegate) {
+        LocalDate(Object delegate) {
             this.delegate = delegate;
         }
 
@@ -46,17 +46,17 @@ public class Calendar {
             return new LocalDate(parse_impl(dueDate, dmMyyyy));
         }
 
-        @JavaScriptBody(args = {"dueDate", "dmMyyyy"}, body = "return moment(dueDate,dmMyyyy);")
+        @JavaScriptBody(args = {"dueDate", "dmMyyyy"}, body = "var m = {}; m.m = moment(dueDate,dmMyyyy); return m;")
         private static native Object parse_impl(String dueDate, String dmMyyyy);
 
         public int compareTo(LocalDate other) {
             return compareTo_impl(delegate, other.delegate);
         }
 
-        @JavaScriptBody(args = {"me", "other"}, body = "return (me >other)? 1: me==other ? 0:-1;")
+        @JavaScriptBody(args = {"me", "other"}, body = "return (me.m > other.m)? 1: me.m==other.m ? 0:-1;")
         private static native int compareTo_impl(Object me, Object other);
 
-        @JavaScriptBody(args = { "delegate" }, body = "return delegate.dayOfYear();")
+        @JavaScriptBody(args = { "delegate" }, body = "return delegate.m.dayOfYear();")
         public static native int getDayOfYear_impl(Object delegate); 
 
         public int getDayOfYear() {
